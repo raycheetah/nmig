@@ -12,13 +12,13 @@
     "Check the 'source.host' parameter, that can be either '127.0.0.1' or 'localhost', depends on your setup."
   ],
   "source": {
-    "host": "127.0.0.1",
-    "port": 3306,
-    "database": "sample_stuff",
+    "host": "${MYSQL_HOST}",
+    "port": "${MYSQL_PORT}",
+    "database": "${MYSQL_DATABASE}",
     "charset": "utf8mb4",
     "supportBigNumbers": true,
-    "user": "root",
-    "password": "0123456789"
+    "user": "${MYSQL_USER}",
+    "password": "${MYSQL_PASSWORD}"
   },
 
   "target_description": [
@@ -29,12 +29,12 @@
     "Check the 'target.host' parameter, that can be either '127.0.0.1' or 'localhost', depends on your setup."
   ],
   "target": {
-    "host": "127.0.0.1",
-    "port": 5432,
-    "database": "sample_stuff",
+    "host": "${POSTGRES_HOST}",
+    "port": "${POSTGRES_PORT}",
+    "database": "${POSTGRES_DATABASE}",
     "charset": "UTF8",
-    "user": "postgres",
-    "password": "0123456789"
+    "user": "${POSTGRES_USER}",
+    "password": "${POSTGRES_PASSWORD}"
   },
 
   "max_each_db_connection_pool_size_description": [

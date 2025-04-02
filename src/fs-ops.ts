@@ -186,6 +186,16 @@ export const logInBackground = (
   });
 };
 
+const replacePlaceholders = (obj: any) => {
+  for (const key in obj) {
+    if (typeof obj[key] === 'string') {
+      obj[key] = obj[key].replace(/\$\{(\w+)\}/g, (_, name) => process.env[name] || '');
+    } else if (typeof obj[key] === 'object') {
+      replacePlaceholders(obj[key]);
+    }
+  }
+};
+
 /**
  * Reads and parses JOSN file under given path.
  */
@@ -200,6 +210,7 @@ const readAndParseJsonFile = (pathToFile: string): Promise<any> => {
       }
 
       const config: any = JSON.parse(data.toString());
+      replacePlaceholders(config);
       resolve(config);
     });
   });

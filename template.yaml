@@ -1,0 +1,44 @@
+---
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: ${NAME}
+  namespace: ${NAMESPACE}
+  labels:
+    epic: ${NAME}
+spec:
+  template:
+    metadata:
+      labels:
+        epic: ${NAME}
+    spec:
+      containers:
+        - name: ${NAME}
+          image: ${IMAGE}
+          imagePullPolicy: "Always"
+          env:
+            - name: pgsql_host
+              value: "${pgsql_host}"
+            - name: pgsql_port
+              value: "${pgsql_port}"
+            - name: pgsql_db
+              value: "${pgsql_db}"
+            - name: pgsql_user
+              value: "${pgsql_user}"
+            - name: pgsql_password
+              value: "${pgsql_password}"
+            - name: mysql_host
+              value: "${mysql_host}"
+            - name: mysql_port
+              value: "${mysql_port}"
+            - name: mysql_db
+              value: "${mysql_db}"
+            - name: mysql_user
+              value: "${mysql_user}"
+            - name: mysql_password
+              value: "${mysql_password}"
+          ports:
+            - containerPort: ${mysql_port}
+            - containerPort: ${pgsql_port}
+      restartPolicy: Never
+  backoffLimit: 4
